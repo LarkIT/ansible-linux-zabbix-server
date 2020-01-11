@@ -1,4 +1,4 @@
-# roles/zabbix-server/tasks/main.yml
+# tasks/main.yml
 # Install and configure Zabbix server
 
 - name: Ensure that extra packages are installed
