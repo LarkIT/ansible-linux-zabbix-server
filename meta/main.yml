@@ -1,0 +1,4 @@
+# meta/main.json
+
+dependencies:
+  - role: dj-wasabi.zabbix-server
