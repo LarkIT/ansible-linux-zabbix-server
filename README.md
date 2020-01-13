@@ -1,7 +1,13 @@
 # Lark IT Ansible Zabbix Server Role
-For CentOS 7
+
+Install and configure Zabbix server
+
+## Operating Systems
+This role is known to work on the following operating systems:
+- CentOS 7
 
 ## Dependencies
+This role depends on the following Ansible Galaxy roles:
 dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
 
 ## Variables
