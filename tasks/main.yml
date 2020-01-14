@@ -1,35 +1,40 @@
 # tasks/main.yml
-# Install and configure Zabbix server
+# Configure Zabbix server
 
 - name: Ensure that extra packages are installed
   yum:
     name: ['policycoreutils-python', 'firewalld', 'python-firewall']
     state: installed
+
 - name: Start firewalld service
   service:
     name: firewalld
     state: started
     enabled: yes  
-- include_role: 
-    name: dj-wasabi.zabbix-server
+
 - name: Change the zabbix_t SELinux domain to permissive
   selinux_permissive:
     name: zabbix_t
     permissive: true
   register: selinux_permissive_zabbix_t
+
 - name: Restart zabbix-server service after SELinux changes
   service:
     name: zabbix-server
     state: restarted
   when: selinux_permissive_zabbix_t is changed
+
 - name: Open Zabbix server port in firewall
   firewalld:
     port: 10051/tcp
     permanent: yes
     state: enabled
   register: firewall10051
+
 - name: Reload firewall
   command: firewall-cmd --reload
   when: firewall10051 is changed
   register: firewallcmdout
-- debug: var=firewallcmdout
+
+- debug: 
+    var: firewallcmdout

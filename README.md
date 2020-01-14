@@ -11,4 +11,7 @@ This role depends on the following Ansible Galaxy roles:
 dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
 
 ## Variables
-See Ansible Galaxy role documentation
+| Variable | Required? | Default Value | Type | Description |
+|----------|--------|-------|------|--------|
+| zabbix_version | Optional | 4.2 | String | Zabbix package major version |
+Refer to Galaxy role documentation for other variables
