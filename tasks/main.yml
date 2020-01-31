@@ -1,6 +1,6 @@
 # tasks/main.yml
 # Configure Zabbix server
-
+---
 - name: Ensure that extra packages are installed
   yum:
     name: ['policycoreutils-python', 'firewalld', 'python-firewall']
