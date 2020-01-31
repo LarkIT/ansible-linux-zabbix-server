@@ -14,5 +14,5 @@ dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
 | Variable | Required? | Default Value | Type | Description |
 |----------|--------|-------|------|--------|
 | zabbix_version | Optional | 4.2 | String | Zabbix package major version |
-| zabbix_opsgenie_integration | Optional | false | Boolean | Wheter or not to include OpsGenie integration configuration |
+| zabbix_server_opsgenie_integration | Optional | false | Boolean | Wheter or not to include OpsGenie integration configuration |
 Refer to Galaxy role documentation for other variables
