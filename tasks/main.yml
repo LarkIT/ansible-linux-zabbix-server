@@ -56,4 +56,9 @@
       owner: opsgenie
       group: opsgenie
       mode: "0664"
+  - name: Install OEC
+    yum:
+      name: https://opsgeniedownloads.s3-us-west-2.amazonaws.com/repo/oec-1.0.3-1.x86_64.rpm
+      state: present
+
   when: zabbix_server_opsgenie_integration
