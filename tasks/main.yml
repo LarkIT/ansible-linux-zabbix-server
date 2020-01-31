@@ -38,3 +38,11 @@
 
 - debug: 
     var: firewallcmdout
+
+- name: Zabbix OpsGenie configuration
+  block: 
+    name: Install Zabbix OpsGenie plugin
+    yum:
+      name: https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-zabbix-2.22.0-1.all.noarch.rpm
+      state: present
+  when: zabbix_opsgenie_integration
