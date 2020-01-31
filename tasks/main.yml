@@ -49,9 +49,9 @@
     yum:
       name: https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-zabbix-2.22.0-1.all.noarch.rpm
       state: present
-  - name: Install Zabbiz OpsGenie plugin configuraiton file
+  - name: Install Zabbix OpsGenie plugin configuraiton file
     template:
-      source: opsgenie-integration.conf.j2
+      src: opsgenie-integration.conf.j2
       dest: /etc/opsgenie/conf/opsgenie-integration.conf
       owner: opsgenie
       group: opsgenie
