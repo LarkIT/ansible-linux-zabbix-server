@@ -68,7 +68,7 @@
       group: opsgenie
       mode: '0755'
   - name: Copy OEC init script
-    file:
+    copy:
       src: oec.service
       dest: /etc/systemd/system/oec.service
       owner: root
@@ -78,13 +78,13 @@
   - name: Copy OEC config file
     template: 
       src: zabbixConfig.json.j2
-      dest: /etc/opsgenie/oec/zabbixConfig.json
+      dest: /etc/opsgenie/oec/zabbixConfig.json.j2
       owner: opsgenie
       group: opsgenie
       mode: '0600'
     notify: restart oec
   - name: Copy OEC Zabbix script
-    file: 
+    copy: 
       src: zabbixActionExecutorForZabbix4.py
       dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
       owner: root
