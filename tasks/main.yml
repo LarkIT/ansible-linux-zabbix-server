@@ -41,14 +41,17 @@
 
 - name: Zabbix OpsGenie configuration
   block: 
-  - name: Add Zabbix url to hosts file
+  
+  - name: Add Zabbix URL to hosts file
     shell: grep -qxF '127.0.0.1   {{ zabbix_url|quote }}' /etc/hosts || echo '127.0.0.1   {{ zabbix_url|quote }}' >> /etc/hosts
     args: 
       executable: /bin/bash
-  - name: Install Zabbix OpsGenie plugin
+  
+   name: Install Zabbix OpsGenie plugin
     yum:
       name: https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-zabbix-2.22.0-1.all.noarch.rpm
       state: present
+  
   - name: Install Zabbix OpsGenie plugin configuraiton file
     template:
       src: opsgenie-integration.conf.j2
@@ -56,10 +59,12 @@
       owner: opsgenie
       group: opsgenie
       mode: '0664'
+  
   - name: Install OEC
     yum:
       name: https://opsgeniedownloads.s3-us-west-2.amazonaws.com/repo/oec-1.0.3-1.x86_64.rpm
       state: present
+  
   - name: Create OEC config directory
     file:
       path: /etc/opsgenie/oec
@@ -67,6 +72,7 @@
       owner: opsgenie
       group: opsgenie
       mode: '0755'
+  
   - name: Copy OEC init script
     copy:
       src: oec.service
@@ -75,6 +81,7 @@
       group: root
       mode: '0644'
     notify: systemd daemon-reload
+  
   - name: Copy OEC config file
     template: 
       src: zabbixConfig.json.j2
@@ -83,6 +90,7 @@
       group: opsgenie
       mode: '0600'
     notify: restart oec
+  
   - name: Copy OEC Zabbix script
     copy: 
       src: zabbixActionExecutorForZabbix4.py
@@ -91,6 +99,7 @@
       group: root
       mode: '0755'
     notify: restart oec
+  
   - name: Start and enable OEC service
     service:
       name: oec

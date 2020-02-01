@@ -3,8 +3,8 @@ Description=Opsgenie Edge Connector (OEC)
 After=network.target
 
 [Service]
-export OEC_CONF_SOURCE_TYPE="local"
-export OEC_CONF_LOCAL_FILEPATH="/etc/opsgenie/oec/zabbixConfig.json"
+Environment="OEC_CONF_SOURCE_TYPE=local"
+Environment="OEC_CONF_LOCAL_FILEPATH=/etc/opsgenie/oec/zabbixConfig.json"
 Group=opsgenie
 User=opsgenie
 Type=simple
