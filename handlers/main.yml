@@ -1,0 +1,10 @@
+# handlers/main.yml
+---
+- name: systemd daemon-reload
+  systemd:
+    daemon_reload: true
+
+- name: restart zabbix-agent
+  service:
+    name: oec
+    state: restarted

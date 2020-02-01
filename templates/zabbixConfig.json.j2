@@ -1,0 +1,31 @@
+{
+    "apiKey": "{{ zabix_server_opsgenie_api_key }}",
+    "baseUrl": "https://api.opsgenie.com",
+    "logLevel": "DEBUG",
+    "globalArgs": [],
+    "globalFlags": {
+      "command_url": "{{ zabbix_server_opsgenie_command_url }}",
+      "user": "{{ zabbix_server_opsgenie_user }}",
+      "password": "{{ zabbix_server_opsgenie_password }}"
+    },
+    "actionMappings": {
+      "Acknowledge": {
+        "filepath": "/usr/local/bin/zabbixActionExecutorForZabbix4.py",
+        "sourceType": "local",
+        "environmentVariables": [],
+        "stdout": "/var/log/oec.log"
+      }
+    },
+    "pollerConf": {
+      "pollingWaitIntervalInMillis": 100,
+      "visibilityTimeoutInSec": 30,
+      "maxNumberOfMessages": 10
+    },
+    "poolConf": {
+      "maxNumberOfWorker": 12,
+      "minNumberOfWorker": 4,
+      "monitoringPeriodInMillis": 15000,
+      "keepAliveTimeInMillis": 6000,
+      "queueSize": 0
+    }
+  }
