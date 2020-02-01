@@ -85,11 +85,11 @@
     notify: restart oec
   - name: Copy OEC Zabbix script
       file: 
-      src: zabbixActionExecutorForZabbix4.py
-      dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
-      owner: root
-      group: root
-      mode: '0755'
+        src: zabbixActionExecutorForZabbix4.py
+        dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
+        owner: root
+        group: root
+        mode: '0755'
     notify: restart oec
   - name: Start and enable OEC service
       service:
