@@ -8,7 +8,7 @@ This role is known to work on the following operating systems:
 
 ## Dependencies
 This role depends on the following Ansible Galaxy roles:
-dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
+- dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
 
 ## Variables
 | Variable | Required? | Default Value | Type | Description |
@@ -19,4 +19,5 @@ dj-wasabi.zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server)
 | zabbix_server_opsgenie_command_url | When zabbix_server_opsgenie_integration is true | N/A | String | The Zabbix URL the OpsGenie plugin should use to execute commands on Zabbix |
 | zabbix_server_opsgenie_user | When zabbix_server_opsgenie_integration is true | opsgenie | String | The Zabbix user that the OpsGenie plugin uses to authenticate 
 | zabbix_server_opsgenie_password | When zabbix_server_opsgenie_integration is true | N/A | String | The Zabbix password that the OpsGenie plugin uses to authenticate |
+
 Refer to Galaxy role documentation for other variables
