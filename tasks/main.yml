@@ -92,10 +92,10 @@
       mode: '0755'
     notify: restart oec
   - name: Start and enable OEC service
-      service:
-        name: oec
-        state: started 
-        enabled: true
+    service:
+      name: oec
+      state: started 
+      enabled: true
   
 
 
