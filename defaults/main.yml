@@ -1,5 +1,6 @@
 # defaults/main.yml
 # Default variables
 ---
+zabbix_server_starthttppollers: 4
 zabbix_server_opsgenie_integration: false
 zabbix_server_opsgenie_user: opsgenie
