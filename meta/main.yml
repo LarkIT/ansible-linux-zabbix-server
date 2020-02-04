@@ -4,3 +4,4 @@ dependencies:
   - role: dj-wasabi.zabbix-server
     vars: 
       zabbix_version: 4.2
+      zabbix_server_starthttppollers: 4
