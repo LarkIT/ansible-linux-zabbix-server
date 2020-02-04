@@ -39,6 +39,14 @@
 - debug: 
     var: firewallcmdout
 
+- name: Copy SSL Cert Check script
+  copy:
+    src: ssl_cert_check.sh
+    dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
+    owner: root
+    group: root
+    mode: '0755'
+
 - name: Zabbix OpsGenie configuration
   block: 
   
