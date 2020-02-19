@@ -93,7 +93,7 @@
   - name: Copy OEC config file
     template: 
       src: zabbixConfig.json.j2
-      dest: /etc/opsgenie/oec/zabbixConfig.json.j2
+      dest: /etc/opsgenie/oec/zabbixConfig.json
       owner: opsgenie
       group: opsgenie
       mode: '0600'
