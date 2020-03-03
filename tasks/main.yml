@@ -103,8 +103,8 @@
     copy: 
       src: zabbixActionExecutorForZabbix4.py
       dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
-      owner: root
-      group: root
+      owner: opsgenie
+      group: opsgenie
       mode: '0755'
     notify: restart oec
   
