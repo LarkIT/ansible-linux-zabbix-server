@@ -1,6 +1,25 @@
 # tasks/main.yml
 # Configure Zabbix server
 ---
+
+- name: Ensure Zabbix repo is installed
+  
+- name: Install Zabbix repo CentOS 7
+  yum_repository:
+    name: zabbix
+    description: "Zabbix Official Repository - $basearch" 
+    file: zabbix
+    baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/$basearch/
+    gpgkey: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
+    gpgcheck: true
+  when: zabbix_server_manage_repo
+
+- name: Install Zabbix Server package
+  yum:
+    name: zabbix-server
+    state: installed
+
+
 - name: Ensure that extra packages are installed
   yum:
     name: ['policycoreutils-python', 'firewalld', 'python-firewall']
@@ -114,6 +133,4 @@
       state: started 
       enabled: true
   
-
-
   when: zabbix_server_opsgenie_integration
