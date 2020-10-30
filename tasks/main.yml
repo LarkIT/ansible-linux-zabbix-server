@@ -20,16 +20,17 @@
     state: installed
 
 
+
 - name: Ensure that extra packages are installed
   yum:
     name: ['policycoreutils-python', 'firewalld', 'python-firewall']
     state: installed
 
-- name: Start firewalld service
+- name: Ensure that firewalld is enabled and started
   service:
     name: firewalld
     state: started
-    enabled: yes  
+    enabled: true
 
 - name: Change the zabbix_t SELinux domain to permissive
   selinux_permissive:
@@ -51,12 +52,8 @@
   register: firewall10051
 
 - name: Reload firewall
-  command: firewall-cmd --reload
+  shell: firewall-cmd --reload
   when: firewall10051 is changed
-  register: firewallcmdout
-
-- debug: 
-    var: firewallcmdout
 
 - name: Copy SSL Cert Check script
   copy:

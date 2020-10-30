@@ -6,6 +6,11 @@ zabbix_server_opsgenie_integration: false
 zabbix_server_opsgenie_user: opsgenie
 zabbix_server_manage_repo: true
 
+zabbix_server_listenport: 10051
+zabbix_server_logtype: file
+zabbix_server_logfile: /var/log/zabbix/zabbix_server.log
+
+
 zabbix_server_starthttppollers: 4
 zabbix_server_timeout: 30
 zabbix_server_startpingers: 4
