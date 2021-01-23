@@ -6,18 +6,10 @@ zabbix_server_opsgenie_integration: false
 zabbix_server_opsgenie_user: opsgenie
 zabbix_server_manage_repo: true
 
-zabbix_server_listenport: 10051
-zabbix_server_logtype: file
 zabbix_server_logfile: /var/log/zabbix/zabbix_server.log
-zabbix_server_logfile_size: 1
-zabbix_server_debuglevel: 3
-zabbix_server_pidfile: /tmp/zabbix_server.pid
-zabbix_server_socketdir: /tmp
-zabbix_server_dbhost: localhost
-zabbix_server_dbname: zabbix
-zabbix_server_dbuser: zabbix
-zabbix_server_dbpassword: zabbix
-
+zabbix_server_logfilesize: 0
+zabbix_server_pidfile: /var/run/zabbix/zabbix_server.pid
+zabbix_server_socketdir: /var/run/zabbix
 
 zabbix_server_timeout: 30
 zabbix_server_startpingers: 4

@@ -6,11 +6,22 @@
 ### Option: ListenPort
 #	Listen port for trapper.
 #
+# Mandatory: no
+# Range: 1024-32767
+# Default:
+# ListenPort=10051
+
+{% if zabbix_server_listenport is defined and zabbix_server_listenport %}
 ListenPort={{ zabbix_server_listenport }}
+{% endif %}
 
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
 #
+# Mandatory: no
+# Default:
+# SourceIP=
+
 {% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
 SourceIP={{ zabbix_server_sourceip }}
 {% endif %}
@@ -21,6 +32,10 @@ SourceIP={{ zabbix_server_sourceip }}
 #		file    - file specified with LogFile parameter
 #		console - standard output
 #
+# Mandatory: no
+# Default:
+# LogType=file
+
 {% if zabbix_server_logtype is defined and zabbix_server_logtype %}
 LogType={{ zabbix_server_logtype }}
 {% endif %}
@@ -28,12 +43,21 @@ LogType={{ zabbix_server_logtype }}
 ### Option: LogFile
 #	Log file name for LogType 'file' parameter.
 #
+# Mandatory: yes, if LogType is set to file, otherwise no
+# Default:
+# LogFile=
+
 LogFile={{ zabbix_server_logfile }}
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
 #	0 - disable automatic log rotation.
 #
+# Mandatory: no
+# Range: 0-1024
+# Default:
+# LogFileSize=1
+
 LogFileSize={{ zabbix_server_logfilesize }}
 
 ### Option: DebugLevel
@@ -45,17 +69,31 @@ LogFileSize={{ zabbix_server_logfilesize }}
 #	4 - for debugging (produces lots of information)
 #	5 - extended debugging (produces even more information)
 #
+# Mandatory: no
+# Range: 0-5
+# Default:
+# DebugLevel=3
+{% if zabbix_server_debuglevel is defined and zabbix_server_debuglevel %}
 DebugLevel={{ zabbix_server_debuglevel }}
+{% endif %}
 
 ### Option: PidFile
 #	Name of PID file.
 #
+# Mandatory: no
+# Default:
+# PidFile=/tmp/zabbix_server.pid
+
 PidFile={{ zabbix_server_pidfile }}
 
 ### Option: SocketDir
 #	IPC socket directory.
 #		Directory to store IPC sockets used by internal Zabbix services.
 #
+# Mandatory: no
+# Default:
+# SocketDir=/tmp
+
 SocketDir={{ zabbix_server_socketdir }}
 
 ### Option: DBHost
@@ -63,7 +101,13 @@ SocketDir={{ zabbix_server_socketdir }}
 #	If set to localhost, socket is used for MySQL.
 #	If set to empty string, socket is used for PostgreSQL.
 #
+# Mandatory: no
+# Default:
+# DBHost=localhost
+
+{% if zabbix_server_dbhost is defined and zabbix_server_dbhost %}
 DBHost={{ zabbix_server_dbhost }}
+{% endif %}
 
 ### Option: DBName
 #	Database name.
@@ -164,20 +208,18 @@ StartIPMIPollers={{ zabbix_server_startipmipollers }}
 #	Number of pre-forked instances of preprocessing workers.
 #		The preprocessing manager process is automatically started when preprocessor worker is started.
 #
-# Mandatory: no
-# Range: 1-1000
-# Default:
-# StartPreprocessors=3
+{% if zabbix_server_startpreprocessors is defined and zabbix_server_startpreprocessors %}
+StartPreprocessors={{ zabbix_server_startpreprocessors }}
+{% endif %}
 
 ### Option: StartPollersUnreachable
 #	Number of pre-forked instances of pollers for unreachable hosts (including IPMI and Java).
 #	At least one poller for unreachable hosts must be running if regular, IPMI or Java pollers
 #	are started.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartPollersUnreachable=1
+{% if zabbix_server_startpollersunreachable is defined and zabbix_server_startpollersunreachable %}
+StartPollersUnreachable={{ zabbix_server_startpollersunreachable }}
+{% endif %}
 
 ### Option: StartTrappers
 #	Number of pre-forked instances of trappers.
@@ -185,34 +227,30 @@ StartIPMIPollers={{ zabbix_server_startipmipollers }}
 #	At least one trapper process must be running to display server availability and view queue
 #	in the frontend.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartTrappers=5
+{% if zabbix_server_starttrappers is defined and zabbix_server_starttrappers %}
+StartTrappers={{ zabbix_server_starttrappers }}
+{% endif %}
 
 ### Option: StartPingers
 #	Number of pre-forked instances of ICMP pingers.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartPingers=1
+{% if zabbix_server_startpingers is defined and zabbix_server_startpingers %}
+StartPingers={{ zabbix_server_startpingers }}
+{% endif %}
 
 ### Option: StartDiscoverers
 #	Number of pre-forked instances of discoverers.
 #
-# Mandatory: no
-# Range: 0-250
-# Default:
-# StartDiscoverers=1
+{% if zabbix_server_startdiscoverers is defined and zabbix_server_startdiscoverers %}
+StartDiscoverers={{ zabbix_server_startdiscoverers }}
+{% endif %}
 
 ### Option: StartHTTPPollers
 #	Number of pre-forked instances of HTTP pollers.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartHTTPPollers=1
+{% if zabbix_server_starthttppollers is defined and zabbix_server_starthttppollers %}
+StartHTTPPollers={{ zabbix_server_starthttppollers }}
+{% endif %}
 
 ### Option: StartTimers
 #	Number of pre-forked instances of timers.
@@ -220,101 +258,91 @@ StartIPMIPollers={{ zabbix_server_startipmipollers }}
 #	Only the first timer process handles host maintenance updates. Problem suppression updates are shared
 #	between all timers.
 #
-# Mandatory: no
-# Range: 1-1000
-# Default:
-# StartTimers=1
+{% if zabbix_server_starttimers is defined and zabbix_server_starttimers %}
+StartTimers={{ zabbix_server_starttimers }}
+{% endif %}
 
 ### Option: StartEscalators
 #	Number of pre-forked instances of escalators.
 #
-# Mandatory: no
-# Range: 0-100
-# Default:
-# StartEscalators=1
+{% if zabbix_server_startescalators is defined and zabbix_server_startescalators %}
+StartEscalators={{ zabbix_server_startescalators }}
+{% endif %}
 
 ### Option: StartAlerters
 #	Number of pre-forked instances of alerters.
 #	Alerters send the notifications created by action operations.
 #
-# Mandatory: no
-# Range: 0-100
-# Default:
-# StartAlerters=3
+{% if zabbix_server_startalerters is defined and zabbix_server_startalerters %}
+StartAlerters={{ zabbix_server_startalerters }}
+{% endif %}
 
 ### Option: JavaGateway
 #	IP address (or hostname) of Zabbix Java gateway.
 #	Only required if Java pollers are started.
 #
-# Mandatory: no
-# Default:
-# JavaGateway=
+{% if zabbix_server_javagateway is defined and zabbix_server_javagateway %}
+JavaGateway={{ zabbix_server_javagateway }}
+{% endif  %}
 
 ### Option: JavaGatewayPort
 #	Port that Zabbix Java gateway listens on.
 #
-# Mandatory: no
-# Range: 1024-32767
-# Default:
-# JavaGatewayPort=10052
+{% if zabbix_server_javagatewayport is defined and zabbix_server_javagatewayport %}
+JavaGatewayPort={{ zabbix_server_javagatewayport }}
+{% endif  %}
 
 ### Option: StartJavaPollers
 #	Number of pre-forked instances of Java pollers.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartJavaPollers=0
+{% if zabbix_server_startjavapollers is defined and zabbix_server_startjavapollers %}
+StartJavaPollers={{ zabbix_server_startjavapollers }}
+{% endif  %}
 
 ### Option: StartVMwareCollectors
 #	Number of pre-forked vmware collector instances.
 #
-# Mandatory: no
-# Range: 0-250
-# Default:
-# StartVMwareCollectors=0
+{% if zabbix_server_startvmwarecollectors is defined and zabbix_server_startvmwarecollectors %}
+StartVMwareCollectors={{ zabbix_server_startvmwarecollectors }}
+{% endif %}
 
 ### Option: VMwareFrequency
 #	How often Zabbix will connect to VMware service to obtain a new data.
 #
-# Mandatory: no
-# Range: 10-86400
-# Default:
-# VMwareFrequency=60
+{% if zabbix_server_vmwarefrequency is defined and zabbix_server_vmwarefrequency %}
+VMwareFrequency={{ zabbix_server_vmwarefrequency }}
+{% endif %}
 
 ### Option: VMwarePerfFrequency
 #	How often Zabbix will connect to VMware service to obtain performance data.
 #
-# Mandatory: no
-# Range: 10-86400
-# Default:
-# VMwarePerfFrequency=60
+{% if zabbix_server_vmwareperffrequency is defined and zabbix_server_vmwareperffrequency %}
+VMwarePerfFrequency={{ zabbix_server_vmwareperffrequency }}
+{% endif %}
 
 ### Option: VMwareCacheSize
 #	Size of VMware cache, in bytes.
 #	Shared memory size for storing VMware data.
 #	Only used if VMware collectors are started.
 #
-# Mandatory: no
-# Range: 256K-2G
-# Default:
-# VMwareCacheSize=8M
+{% if zabbix_server_vmwarecachesize is defined and zabbix_server_vmwarecachesize %}
+VMwareCacheSize={{ zabbix_server_vmwarecachesize }}
+{% endif  %}
 
 ### Option: VMwareTimeout
 #	Specifies how many seconds vmware collector waits for response from VMware service.
 #
-# Mandatory: no
-# Range: 1-300
-# Default:
-# VMwareTimeout=10
+{% if zabbix_server_vmwaretimeout is defined and zabbix_server_vmwaretimeout %}
+VMwareTimeout={{ zabbix_server_vmwaretimeout }}
+{% endif %}
 
 ### Option: SNMPTrapperFile
 #	Temporary file used for passing data from SNMP trap daemon to the server.
 #	Must be the same as in zabbix_trap_receiver.pl or SNMPTT configuration file.
 #
-# Mandatory: no
-# Default:
-# SNMPTrapperFile=/tmp/zabbix_traps.tmp
+%
+SNMPTrapperFile={{ zabbix_server_snmptrapperfile }}
+
 
 ### Option: StartSNMPTrapper
 #	If 1, SNMP trapper process is started.
