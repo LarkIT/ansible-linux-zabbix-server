@@ -6,17 +6,14 @@
 ### Option: ListenPort
 #	Listen port for trapper.
 #
-# Mandatory: no
-# Range: 1024-32767
-# Default:
-# ListenPort=10051
+ListenPort={{ zabbix_server_listenport }}
 
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
 #
-# Mandatory: no
-# Default:
-# SourceIP=
+{% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
+SourceIP={{ zabbix_server_sourceip }}
+{% endif %}
 
 ### Option: LogType
 #	Specifies where log messages are written to:
@@ -24,27 +21,20 @@
 #		file    - file specified with LogFile parameter
 #		console - standard output
 #
-# Mandatory: no
-# Default:
-# LogType=file
+{% if zabbix_server_logtype is defined and zabbix_server_logtype %}
+LogType={{ zabbix_server_logtype }}
+{% endif %}
 
 ### Option: LogFile
 #	Log file name for LogType 'file' parameter.
 #
-# Mandatory: yes, if LogType is set to file, otherwise no
-# Default:
-# LogFile=
-
-LogFile=/tmp/zabbix_server.log
+LogFile={{ zabbix_server_logfile }}
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
 #	0 - disable automatic log rotation.
 #
-# Mandatory: no
-# Range: 0-1024
-# Default:
-# LogFileSize=1
+LogFileSize={{ zabbix_server_logfilesize }}
 
 ### Option: DebugLevel
 #	Specifies debug level:
@@ -55,96 +45,76 @@ LogFile=/tmp/zabbix_server.log
 #	4 - for debugging (produces lots of information)
 #	5 - extended debugging (produces even more information)
 #
-# Mandatory: no
-# Range: 0-5
-# Default:
-# DebugLevel=3
+DebugLevel={{ zabbix_server_debuglevel }}
 
 ### Option: PidFile
 #	Name of PID file.
 #
-# Mandatory: no
-# Default:
-# PidFile=/tmp/zabbix_server.pid
+PidFile={{ zabbix_server_pidfile }}
 
 ### Option: SocketDir
 #	IPC socket directory.
 #		Directory to store IPC sockets used by internal Zabbix services.
 #
-# Mandatory: no
-# Default:
-# SocketDir=/tmp
+SocketDir={{ zabbix_server_socketdir }}
 
 ### Option: DBHost
 #	Database host name.
 #	If set to localhost, socket is used for MySQL.
 #	If set to empty string, socket is used for PostgreSQL.
 #
-# Mandatory: no
-# Default:
-# DBHost=localhost
+DBHost={{ zabbix_server_dbhost }}
 
 ### Option: DBName
 #	Database name.
 #
-# Mandatory: yes
-# Default:
-# DBName=
-
-DBName=zabbix
+DBName={{ zabbix_server_dbname }}
 
 ### Option: DBSchema
 #	Schema name. Used for PostgreSQL.
 #
-# Mandatory: no
-# Default:
-# DBSchema=
+{% if zabbix_server_dbschema is defined and zabbix_server_dbschema %}
+DBSchema={{ zabbix_server_dbschema }}
+{% endif %}
 
 ### Option: DBUser
 #	Database user.
 #
-# Mandatory: no
-# Default:
-# DBUser=
-
-DBUser=zabbix
+DBUser={{ zabbix_server_dbuser }}
 
 ### Option: DBPassword
 #	Database password.
 #	Comment this line if no password is used.
 #
-# Mandatory: no
-# Default:
-# DBPassword=
+DBPassword={{ zabbix_server_dbpassword }}
 
 ### Option: DBSocket
 #	Path to MySQL socket.
 #
-# Mandatory: no
-# Default:
-# DBSocket=
+{% if zabbix_server_dbsocket is defined and zabbix_server_dbsocket %}
+DBSocket={{ zabbix_server_dbsocket }}
+{% endif %}
 
 ### Option: DBPort
 #	Database port when not using local socket.
 #
-# Mandatory: no
-# Range: 1024-65535
-# Default:
-# DBPort=
+{% if zabbix_server_dbport is defined and zabbix_server_dbport %}
+DBPort={{ zabbix_server_dbport }}
+{% endif %}
 
 ### Option: HistoryStorageURL
 #	History storage HTTP[S] URL.
 #
-# Mandatory: no
-# Default:
-# HistoryStorageURL=
+{% if zabbix_server_historystorageurl is defined and zabbix_server_historystorageurl %}
+HistoryStorageURL={{ zabbix_server_historystorageurl }}
+{% endif %}
 
 ### Option: HistoryStorageTypes
 #	Comma separated list of value types to be sent to the history storage.
 #
-# Mandatory: no
-# Default:
-# HistoryStorageTypes=uint,dbl,str,log,text
+{% if zabbix_server_historystoragetypes is defined and zabbix_server_historystoragetypes %}
+HistoryStorageTypes={{ zabbix_server_historystoragetypes }}
+{% endif %}
 
 ### Option: HistoryStorageDateIndex
 #	Enable preprocessing of history values in history storage to store values in different indices based on date.
@@ -153,43 +123,42 @@ DBUser=zabbix
 #
 # Mandatory: no
 # Default:
-# HistoryStorageDateIndex=0
+{% if zabbix_server_historystoragedateindex is defined and zabbix_server_historystoragedateindex %}
+HistoryStorageDateIndex={{ zabbix_server_historystoragedateindex }}
+{% endif %}
 
 ### Option: ExportDir
 #	Directory for real time export of events, history and trends in newline delimited JSON format.
 #	If set, enables real time export.
 #
-# Mandatory: no
-# Default:
-# ExportDir=
+{% if zabbix_server_exportdir is defined and zabbix_server_exportdir %}
+ExportDir={{ zabbix_server_exportdir }}
+{% endif %}
 
 ### Option: ExportFileSize
 #	Maximum size per export file in bytes.
 #	Only used for rotation if ExportDir is set.
 #
-# Mandatory: no
-# Range: 1M-1G
-# Default:
-# ExportFileSize=1G
+{% if zabbix_server_exportfilesize is defined and zabbix_server_exportfilesize %}
+ExportFileSize={{ zabbix_server_exportfilesize }}
+{% endif %}
 
 ############ ADVANCED PARAMETERS ################
 
 ### Option: StartPollers
-#	Number of pre-forked instances of pollers.
+#	Number of pre-forked ins
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartPollers=5
+{% if zabbix_server_startpollers is defined and zabbix_server_startpollers %}
+StartPollers={{ zabbix_server_startpollers }}
+{% endif %}
 
 ### Option: StartIPMIPollers
 #	Number of pre-forked instances of IPMI pollers.
 #		The IPMI manager process is automatically started when at least one IPMI poller is started.
 #
-# Mandatory: no
-# Range: 0-1000
-# Default:
-# StartIPMIPollers=0
+{% if zabbix_server_startipmipollers is defined and zabbix_server_startipmipollers %}
+StartIPMIPollers={{ zabbix_server_startipmipollers }}
+{% endif %}
 
 ### Option: StartPreprocessors
 #	Number of pre-forked instances of preprocessing workers.
