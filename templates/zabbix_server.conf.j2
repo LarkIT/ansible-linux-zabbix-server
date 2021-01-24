@@ -22,7 +22,7 @@ ListenPort={{ zabbix_server_listenport }}
 # Default:
 # SourceIP=
 
-{# {% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
+{% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
 SourceIP={{ zabbix_server_sourceip }}
 {% endif %}
 
@@ -36,7 +36,7 @@ SourceIP={{ zabbix_server_sourceip }}
 # Default:
 # LogType=file
 
-{% if zabbix_server_logtype is defined and zabbix_server_logtype %}
+{#{% if zabbix_server_logtype is defined and zabbix_server_logtype %}
 LogType={{ zabbix_server_logtype }}
 {% endif %}
 
