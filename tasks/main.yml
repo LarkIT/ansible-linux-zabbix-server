@@ -33,108 +33,108 @@
     group: zabbix
     mode: '0640'
 
-- name: Ensure that firewalld is enabled and started
-  service:
-    name: firewalld
-    state: started
-    enabled: true
+# - name: Ensure that firewalld is enabled and started
+#   service:
+#     name: firewalld
+#     state: started
+#     enabled: true
 
-- name: Change the zabbix_t SELinux domain to permissive
-  selinux_permissive:
-    name: zabbix_t
-    permissive: true
-  register: selinux_permissive_zabbix_t
+# - name: Change the zabbix_t SELinux domain to permissive
+#   selinux_permissive:
+#     name: zabbix_t
+#     permissive: true
+#   register: selinux_permissive_zabbix_t
 
-- name: Restart zabbix-server service after SELinux changes
-  service:
-    name: zabbix-server
-    state: restarted
-  when: selinux_permissive_zabbix_t is changed
+# - name: Restart zabbix-server service after SELinux changes
+#   service:
+#     name: zabbix-server
+#     state: restarted
+#   when: selinux_permissive_zabbix_t is changed
 
-- name: Open Zabbix server port in firewall
-  firewalld:
-    port: 10051/tcp
-    permanent: yes
-    state: enabled
-  register: firewall10051
+# - name: Open Zabbix server port in firewall
+#   firewalld:
+#     port: 10051/tcp
+#     permanent: yes
+#     state: enabled
+#   register: firewall10051
 
-- name: Reload firewall
-  shell: firewall-cmd --reload
-  when: firewall10051 is changed
+# - name: Reload firewall
+#   shell: firewall-cmd --reload
+#   when: firewall10051 is changed
 
-- name: Copy SSL Cert Check script
-  copy:
-    src: ssl_cert_check.sh
-    dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
-    owner: root
-    group: root
-    mode: '0755'
+# - name: Copy SSL Cert Check script
+#   copy:
+#     src: ssl_cert_check.sh
+#     dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
+#     owner: root
+#     group: root
+#     mode: '0755'
 
-- name: Zabbix OpsGenie configuration
-  block: 
+# - name: Zabbix OpsGenie configuration
+#   block: 
   
-  - name: Add Zabbix URL to hosts file
-    shell: grep -qxF '127.0.0.1   {{ zabbix_url|quote }}' /etc/hosts || echo '127.0.0.1   {{ zabbix_url|quote }}' >> /etc/hosts
-    args: 
-      executable: /bin/bash
+#   - name: Add Zabbix URL to hosts file
+#     shell: grep -qxF '127.0.0.1   {{ zabbix_url|quote }}' /etc/hosts || echo '127.0.0.1   {{ zabbix_url|quote }}' >> /etc/hosts
+#     args: 
+#       executable: /bin/bash
   
-  - name: Install Zabbix OpsGenie plugin
-    yum:
-      name: https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-zabbix-2.22.0-1.all.noarch.rpm
-      state: present
+#   - name: Install Zabbix OpsGenie plugin
+#     yum:
+#       name: https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-zabbix-2.22.0-1.all.noarch.rpm
+#       state: present
   
-  - name: Install Zabbix OpsGenie plugin configuraiton file
-    template:
-      src: opsgenie-integration.conf.j2
-      dest: /etc/opsgenie/conf/opsgenie-integration.conf
-      owner: opsgenie
-      group: opsgenie
-      mode: '0664'
+#   - name: Install Zabbix OpsGenie plugin configuraiton file
+#     template:
+#       src: opsgenie-integration.conf.j2
+#       dest: /etc/opsgenie/conf/opsgenie-integration.conf
+#       owner: opsgenie
+#       group: opsgenie
+#       mode: '0664'
   
-  - name: Install OEC
-    yum:
-      name: https://opsgeniedownloads.s3-us-west-2.amazonaws.com/repo/oec-1.0.3-1.x86_64.rpm
-      state: present
+#   - name: Install OEC
+#     yum:
+#       name: https://opsgeniedownloads.s3-us-west-2.amazonaws.com/repo/oec-1.0.3-1.x86_64.rpm
+#       state: present
   
-  - name: Create OEC config directory
-    file:
-      path: /etc/opsgenie/oec
-      state: directory
-      owner: opsgenie
-      group: opsgenie
-      mode: '0755'
+#   - name: Create OEC config directory
+#     file:
+#       path: /etc/opsgenie/oec
+#       state: directory
+#       owner: opsgenie
+#       group: opsgenie
+#       mode: '0755'
   
-  - name: Copy OEC init script
-    copy:
-      src: oec.service
-      dest: /etc/systemd/system/oec.service
-      owner: root
-      group: root
-      mode: '0644'
-    notify: systemd daemon-reload
+#   - name: Copy OEC init script
+#     copy:
+#       src: oec.service
+#       dest: /etc/systemd/system/oec.service
+#       owner: root
+#       group: root
+#       mode: '0644'
+#     notify: systemd daemon-reload
   
-  - name: Copy OEC config file
-    template: 
-      src: zabbixConfig.json.j2
-      dest: /etc/opsgenie/oec/zabbixConfig.json
-      owner: opsgenie
-      group: opsgenie
-      mode: '0600'
-    notify: restart oec
+#   - name: Copy OEC config file
+#     template: 
+#       src: zabbixConfig.json.j2
+#       dest: /etc/opsgenie/oec/zabbixConfig.json
+#       owner: opsgenie
+#       group: opsgenie
+#       mode: '0600'
+#     notify: restart oec
   
-  - name: Copy OEC Zabbix script
-    copy: 
-      src: zabbixActionExecutorForZabbix4.py
-      dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
-      owner: opsgenie
-      group: opsgenie
-      mode: '0755'
-    notify: restart oec
+#   - name: Copy OEC Zabbix script
+#     copy: 
+#       src: zabbixActionExecutorForZabbix4.py
+#       dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
+#       owner: opsgenie
+#       group: opsgenie
+#       mode: '0755'
+#     notify: restart oec
   
-  - name: Start and enable OEC service
-    service:
-      name: oec
-      state: started 
-      enabled: true
+#   - name: Start and enable OEC service
+#     service:
+#       name: oec
+#       state: started 
+#       enabled: true
   
-  when: zabbix_server_opsgenie_integration
+#   when: zabbix_server_opsgenie_integration
