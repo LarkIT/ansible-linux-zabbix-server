@@ -1,9 +1,12 @@
 # tasks/main.yml
-# Configure Zabbix server
+# Install and configure Zabbix server
 ---
 
-- name: Ensure Zabbix repo is installed
-  
+- name: Install extra packages
+  yum:
+    name: ['policycoreutils-python', 'firewalld', 'python-firewall']
+    state: installed
+
 - name: Install Zabbix repo CentOS 7
   yum_repository:
     name: zabbix
@@ -14,17 +17,21 @@
     gpgcheck: true
   when: zabbix_server_manage_repo
 
-- name: Install Zabbix Server package
+- name: Install Zabbix server package
   yum:
     name: zabbix-server
     state: installed
 
+- name: Create database schema
+  command: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h {{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_name }} < 
 
-
-- name: Ensure that extra packages are installed
-  yum:
-    name: ['policycoreutils-python', 'firewalld', 'python-firewall']
-    state: installed
+- name: Configure Zabbix server
+  template:
+    src: zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: root
+    group: zabbix
+    mode: '0640'
 
 - name: Ensure that firewalld is enabled and started
   service:
