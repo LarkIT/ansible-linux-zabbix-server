@@ -10,6 +10,13 @@ zabbix_server_logfile: /var/log/zabbix/zabbix_server.log
 zabbix_server_logfilesize: 0
 zabbix_server_pidfile: /var/run/zabbix/zabbix_server.pid
 zabbix_server_socketdir: /var/run/zabbix
+zabbix_server_snmptrapperfile: /var/log/snmptrap/snmptrap.log
+zabbix_server_timeout: 4
+zabbix_server_logslowqueries: 3000
+zabbix_server_statsallowedip: 127.0.0.1
+
+zabbix_server_dbname: zabbix
+zabbix_server_dbuser: zabbix
 
 zabbix_server_timeout: 30
 zabbix_server_startpingers: 4
