@@ -22,12 +22,6 @@
     name: zabbix-server
     state: installed
 
-- name: Import database schema
-  command: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h {{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_name }} && touch /etc/zabbix/.database_schema_imported
-  args:
-    creates: /etc/zabbix/.database_schema_imported
-      
-
 - name: Configure Zabbix server
   template:
     src: zabbix_server.conf.j2
@@ -35,6 +29,11 @@
     owner: root
     group: zabbix
     mode: '0640'
+
+# - name: Import database schema
+#   command: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h {{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_name }} && touch /etc/zabbix/.database_schema_imported
+#   args:
+#     creates: /etc/zabbix/.database_schema_imported
 
 # - name: Ensure that firewalld is enabled and started
 #   service:
