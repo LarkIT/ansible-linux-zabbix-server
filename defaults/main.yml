@@ -17,7 +17,3 @@ zabbix_server_statsallowedip: 127.0.0.1
 
 zabbix_server_dbname: zabbix
 zabbix_server_dbuser: zabbix
-
-zabbix_server_timeout: 30
-zabbix_server_startpingers: 4
-zabbix_server_startpollers: 8
