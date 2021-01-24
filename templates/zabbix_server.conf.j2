@@ -628,7 +628,7 @@ TrendCacheSize={{ zabbix_server_trendcachesize }}
 # Range: 0,128K-64G
 # Default:
 # ValueCacheSize=8M
-{% if zabbix_server_valuecachesize is defined zabbix_server_valuecachesize %}
+{% if zabbix_server_valuecachesize is defined and zabbix_server_valuecachesize %}
 ValueCacheSize={{ zabbix_server_valuecachesize }}
 {% endif %}
 
@@ -650,7 +650,7 @@ Timeout={{ zabbix_server_timeout }}
 # Default:
 # TrapperTimeout=300
 
-{% if zabbix_server_trappertimeout is zabbix_server_trappertimeout %}
+{% if zabbix_server_trappertimeout is defined and zabbix_server_trappertimeout %}
 TrapperTimeout={{ zabbix_server_trappertimeout }}
 {% endif %}
 
@@ -662,7 +662,7 @@ TrapperTimeout={{ zabbix_server_trappertimeout }}
 # Default:
 # UnreachablePeriod=45
 
-{% if zabbix_server_unreachableperiod is zabbix_server_unreachableperiod %}
+{% if zabbix_server_unreachableperiod is defined and zabbix_server_unreachableperiod %}
 UnreachablePeriod={{ zabbix_server_unreachableperiod }}
 {% endif %}
 
@@ -674,7 +674,7 @@ UnreachablePeriod={{ zabbix_server_unreachableperiod }}
 # Default:
 # UnavailableDelay=60
 
-{% if zabbix_server_unavailabledelay is zabbix_server_unavailabledelay %}
+{% if zabbix_server_unavailabledelay is defined and zabbix_server_unavailabledelay %}
 UnavailableDelay={{ zabbix_server_unavailabledelay }}
 {% endif %}
 
@@ -686,7 +686,7 @@ UnavailableDelay={{ zabbix_server_unavailabledelay }}
 # Default:
 # UnreachableDelay=15
 
-{% if zabbix_server_unreachabledelay is zabbix_server_unreachabledelay %}
+{% if zabbix_server_unreachabledelay is defined and zabbix_server_unreachabledelay %}
 UnreachableDelay={{ zabbix_server_unreachabledelay }}
 {% endif %}
 
@@ -699,7 +699,7 @@ UnreachableDelay={{ zabbix_server_unreachabledelay }}
 # Default:
 # AlertScriptsPath=${datadir}/zabbix/alertscripts
 
-{% if zabbix_server_alertscriptspath is zabbix_server_alertscriptspath %}
+{% if zabbix_server_alertscriptspath is defined and zabbix_server_alertscriptspath %}
 AlertScriptsPath={{ zabbix_server_alertscriptspath }}
 {% endif %}
 
@@ -712,7 +712,7 @@ AlertScriptsPath={{ zabbix_server_alertscriptspath }}
 # Default:
 # ExternalScripts=${datadir}/zabbix/externalscripts
 
-{% if zabbix_server_externalscriptspath is zabbix_server_externalscriptspath %}
+{% if zabbix_server_externalscriptspath is defined and zabbix_server_externalscriptspath %}
 ExternalScripts={{ zabbix_server_externalscriptspath }}
 {% endif %}
 
@@ -724,7 +724,7 @@ ExternalScripts={{ zabbix_server_externalscriptspath }}
 # Default:
 # FpingLocation=/usr/sbin/fping
 
-{% if zabbix_server_fpinglocation is zabbix_server_fpinglocation %}
+{% if zabbix_server_fpinglocation is defined and zabbix_server_fpinglocation %}
 FpingLocation={{ zabbix_server_fpinglocation }}
 {% endif %}
 
@@ -737,7 +737,7 @@ FpingLocation={{ zabbix_server_fpinglocation }}
 # Default:
 # Fping6Location=/usr/sbin/fping6
 
-{% if zabbix_server_fping6location is zabbix_server_fping6location %}
+{% if zabbix_server_fping6location is defined and zabbix_server_fping6location %}
 Fping6Location={{ zabbix_server_fping6location }}
 {% endif %}
 
