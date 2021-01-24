@@ -22,7 +22,7 @@ ListenPort={{ zabbix_server_listenport }}
 # Default:
 # SourceIP=
 
-{% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
+{# {% if zabbix_server_sourceip is defined and zabbix_server_sourceip %}
 SourceIP={{ zabbix_server_sourceip }}
 {% endif %}
 
@@ -1104,7 +1104,7 @@ TLSCipherAll={{ zabbix_server_tlscipherall }}
 # Default:
 # DBTLSConnect=
 
-{% if zabbix_sezabbix_server_dbtlsconnectrver_tlscipherall is defined and zabbix_server_dbtlsconnect %}
+{% if zabbix_server_dbtlsconnect is defined and zabbix_server_dbtlsconnect %}
 DBTLSConnect={{ zabbix_server_dbtlsconnect }}
 {% endif %}
 
@@ -1167,4 +1167,4 @@ DBTLSCipher={{ zabbix_server_dbtlscipher }}
 
 {% if zabbix_server_dbtlscipher13 is defined and zabbix_server_dbtlscipher13 %}
 DBTLSCipher13={{ zabbix_server_dbtlscipher13 }}
-{% endif %}
+{% endif %} #}
