@@ -36,42 +36,43 @@
     creates: /etc/zabbix/.db_schema_imported
   when: zabbix_server_import_db_schema
 
-# - name: Ensure that firewalld is enabled and started
-#   service:
-#     name: firewalld
-#     state: started
-#     enabled: true
+- name: Ensure that firewalld is enabled and started
+  service:
+    name: firewalld
+    state: started
+    enabled: true
 
-# - name: Change the zabbix_t SELinux domain to permissive
-#   selinux_permissive:
-#     name: zabbix_t
-#     permissive: true
-#   register: selinux_permissive_zabbix_t
+- name: Change the zabbix_t SELinux domain to permissive
+  selinux_permissive:
+    name: zabbix_t
+    permissive: true
+  register: selinux_permissive_zabbix_t
 
-# - name: Restart zabbix-server service after SELinux changes
-#   service:
-#     name: zabbix-server
-#     state: restarted
-#   when: selinux_permissive_zabbix_t is changed
+- name: Start zabbix-server service after SELinux changes
+  service:
+    name: zabbix-server
+    state: started
+    enabled: true
+  when: selinux_permissive_zabbix_t is changed
 
-# - name: Open Zabbix server port in firewall
-#   firewalld:
-#     port: 10051/tcp
-#     permanent: yes
-#     state: enabled
-#   register: firewall10051
+- name: Open Zabbix server port in firewall
+  firewalld:
+    port: 10051/tcp
+    permanent: yes
+    state: enabled
+  register: firewall10051
 
-# - name: Reload firewall
-#   shell: firewall-cmd --reload
-#   when: firewall10051 is changed
+- name: Reload firewall
+  shell: firewall-cmd --reload
+  when: firewall10051 is changed
 
-# - name: Copy SSL Cert Check script
-#   copy:
-#     src: ssl_cert_check.sh
-#     dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
-#     owner: root
-#     group: root
-#     mode: '0755'
+- name: Copy SSL Cert Check script
+  copy:
+    src: ssl_cert_check.sh
+    dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
+    owner: root
+    group: root
+    mode: '0755'
 
 # - name: Zabbix OpsGenie configuration
 #   block: 
