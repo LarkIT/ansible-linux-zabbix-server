@@ -4,7 +4,7 @@
 
 - name: Install extra packages
   yum:
-    name: ['policycoreutils-python', 'firewalld', 'python-firewall']
+    name: ['policycoreutils-python', 'firewalld', 'python-firewall', 'mariadb']
     state: installed
 
 - name: Install Zabbix repo CentOS 7
