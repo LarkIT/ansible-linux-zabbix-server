@@ -4,7 +4,7 @@
 zabbix_version: 5.0
 zabbix_server_opsgenie_integration: false
 zabbix_server_opsgenie_user: opsgenie
-zabbix_server_manage_repo: true
+zabbix_server_manage_repos: true
 
 zabbix_server_logfile: /var/log/zabbix/zabbix_server.log
 zabbix_server_logfilesize: 0

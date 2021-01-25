@@ -19,7 +19,7 @@
     baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/$basearch/
     gpgkey: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
     gpgcheck: true
-  when: zabbix_server_manage_repo
+  when: zabbix_server_manage_repos
 
 - name: Install Zabbix server package
   yum:
