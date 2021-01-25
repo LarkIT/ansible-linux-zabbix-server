@@ -146,7 +146,7 @@ DBUser={{ zabbix_server_dbuser }}
 # Default:
 # DBPassword=
 
-{#{% if zabbix_server_dbpassword is defined andzabbix_server_dbpassword %}
+{% if zabbix_server_dbpassword is defined and zabbix_server_dbpassword %}
 DBPassword={{ zabbix_server_dbpassword }}
 {% endif %}
 
@@ -1167,4 +1167,4 @@ DBTLSCipher={{ zabbix_server_dbtlscipher }}
 
 {% if zabbix_server_dbtlscipher13 is defined and zabbix_server_dbtlscipher13 %}
 DBTLSCipher13={{ zabbix_server_dbtlscipher13 }}
-{% endif %} #}
+{% endif %} 
