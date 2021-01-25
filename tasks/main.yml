@@ -31,9 +31,9 @@
     mode: '0640'
 
 - name: Import database schema
-  shell: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz # | /bin/mysql -h{{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_dbname }} && touch /etc/zabbix/.database_schema_imported
+  shell: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h{{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_dbname }} && touch /etc/zabbix/.db_schema_imported
   args:
-    creates: /etc/zabbix/.database_schema_imported
+    creates: /etc/zabbix/.db_schema_imported
   when: zabbix_server_import_db_schema
 
 # - name: Ensure that firewalld is enabled and started
