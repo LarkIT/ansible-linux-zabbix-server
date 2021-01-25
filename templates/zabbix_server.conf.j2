@@ -74,7 +74,7 @@ LogFileSize={{ zabbix_server_logfilesize }}
 # Default:
 # DebugLevel=3
 
-{#{% if zabbix_server_debuglevel is defined and zabbix_server_debuglevel %}
+{% if zabbix_server_debuglevel is defined and zabbix_server_debuglevel %}
 DebugLevel={{ zabbix_server_debuglevel }}
 {% endif %}
 
@@ -146,7 +146,7 @@ DBUser={{ zabbix_server_dbuser }}
 # Default:
 # DBPassword=
 
-{% if zabbix_server_dbpassword is defined andzabbix_server_dbpassword %}
+{#{% if zabbix_server_dbpassword is defined andzabbix_server_dbpassword %}
 DBPassword={{ zabbix_server_dbpassword }}
 {% endif %}
 
