@@ -31,7 +31,7 @@
     mode: '0640'
 
 - name: Import database schema
-  command: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h {{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_dbname }} && touch /etc/zabbix/.database_schema_imported
+  command: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h{{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_dbname }} && touch /etc/zabbix/.database_schema_imported
   args:
     creates: /etc/zabbix/.database_schema_imported
 
