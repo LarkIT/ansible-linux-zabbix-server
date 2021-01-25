@@ -36,7 +36,7 @@ SourceIP={{ zabbix_server_sourceip }}
 # Default:
 # LogType=file
 
-{#{% if zabbix_server_logtype is defined and zabbix_server_logtype %}
+{% if zabbix_server_logtype is defined and zabbix_server_logtype %}
 LogType={{ zabbix_server_logtype }}
 {% endif %}
 
@@ -74,7 +74,7 @@ LogFileSize={{ zabbix_server_logfilesize }}
 # Default:
 # DebugLevel=3
 
-{% if zabbix_server_debuglevel is defined and zabbix_server_debuglevel %}
+{#{% if zabbix_server_debuglevel is defined and zabbix_server_debuglevel %}
 DebugLevel={{ zabbix_server_debuglevel }}
 {% endif %}
 
