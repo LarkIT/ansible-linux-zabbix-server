@@ -132,7 +132,7 @@
       dest: /usr/local/bin/zabbixActionExecutorForZabbix4.py
       owner: opsgenie
       group: opsgenie
-      mode: '0755'
+      mode: '0700'
     notify: restart oec
   
   - name: Start and enable OEC service
