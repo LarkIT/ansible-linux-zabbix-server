@@ -48,11 +48,10 @@
     permissive: true
   register: selinux_permissive_zabbix_t
 
-- name: Start zabbix-server service after SELinux changes
+- name: Restart zabbix-server service after SELinux changes
   service:
     name: zabbix-server
     state: started
-    enabled: true
   when: selinux_permissive_zabbix_t is changed
 
 - name: Open Zabbix server port in firewall
@@ -142,3 +141,9 @@
       enabled: true
   
   when: zabbix_server_opsgenie_integration
+
+- name: Ensure that Zabbix server service is started and enabled
+  service:
+    name: zabbix-server
+    state: started
+    enabled: true
