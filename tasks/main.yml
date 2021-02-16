@@ -151,6 +151,15 @@
     mode: '0655'
   when: zabbix_server_aws_rds_monitoring
 
+- name: Copy SSL cert monitoring script
+  copy: 
+    src: ssl_cert_check.sh
+    dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
+    owner: root
+    group: root
+    mode: '0655'
+  when: zabbix_server_ssl_cert_monitoring
+
 - name: Ensure that Zabbix server service is started and enabled
   service:
     name: zabbix-server
