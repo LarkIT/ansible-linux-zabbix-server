@@ -142,6 +142,15 @@
   
   when: zabbix_server_opsgenie_integration
 
+- name: Copy AWS RDS monitoring script
+  copy: 
+    src: rds_stats.py
+    dest: /usr/lib/zabbix/externalscripts/rds_stats.py
+    owner: root
+    group: root
+    mode: '0655'
+  when: zabbix_server_aws_rds_monitoring
+
 - name: Ensure that Zabbix server service is started and enabled
   service:
     name: zabbix-server
