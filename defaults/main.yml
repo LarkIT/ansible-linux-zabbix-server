@@ -17,6 +17,7 @@ zabbix_server_statsallowedip: 127.0.0.1
 zabbix_server_import_db_schema: false
 zabbix_server_aws_rds_monitoring: false
 zabbix_server_ssl_cert_monitoring: false
+zabbix_server_externalscriptspath: /usr/lib/zabbix/externalscripts
 
 zabbix_server_dbname: zabbix
 zabbix_server_dbuser: zabbix
