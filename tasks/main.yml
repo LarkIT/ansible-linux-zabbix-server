@@ -49,12 +49,6 @@
     permissive: true
   register: selinux_permissive_zabbix_t
 
-- name: Restart zabbix-server service after SELinux changes
-  service:
-    name: zabbix-server
-    state: started
-  when: selinux_permissive_zabbix_t is changed
-
 - name: Open Zabbix server port in firewall
   firewalld:
     port: 10051/tcp
@@ -163,5 +157,7 @@
   service:
     name: zabbix-server
     state: restarted
-  when: zabbix_server_conf.changed
+  when: 
+    (zabbix_server_conf.changed) or
+    (selinux_permissive_zabbix_t)
 
