@@ -159,5 +159,5 @@
     state: restarted
   when: 
     (zabbix_server_conf.changed) or
-    (selinux_permissive_zabbix_t)
+    (selinux_permissive_zabbix_t.changed)
 
