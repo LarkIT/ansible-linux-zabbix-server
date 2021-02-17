@@ -29,6 +29,7 @@
     owner: root
     group: zabbix
     mode: '0640'
+  register: zabbix_server_conf
 
 - name: Import database schema
   shell: /bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | /bin/mysql -h{{ zabbix_server_dbhost }} -u{{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} {{ zabbix_server_dbname }} && touch /etc/zabbix/.db_schema_imported
@@ -64,14 +65,6 @@
 - name: Reload firewall
   shell: firewall-cmd --reload
   when: firewall10051 is changed
-
-- name: Copy SSL Cert Check script
-  copy:
-    src: ssl_cert_check.sh
-    dest: /usr/lib/zabbix/externalscripts/ssl_cert_check.sh
-    owner: root
-    group: root
-    mode: '0755'
 
 - name: Zabbix OpsGenie configuration
   block: 
@@ -165,3 +158,10 @@
     name: zabbix-server
     state: started
     enabled: true
+
+- name: Restart Zabbix server if configuration changes
+  service:
+    name: zabbix-server
+    state: restarted
+  when: zabbix_server_conf.changed
+
